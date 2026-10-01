@@ -1,0 +1,41 @@
+# Ascensus Retirement Portal robots.txt
+# Allow all search engines to crawl the site
+
+User-agent: *
+Allow: /
+Allow: /index.html
+Allow: /account/
+Allow: /401k/
+Allow: /retirement/
+Allow: /resources/
+Allow: /sitemap.xml
+
+# Disallow private/sensitive paths (if any exist)
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+Disallow: /*.json$
+Disallow: /transactional/
+
+# Sitemap location
+Sitemap: https://ascensus.com/sitemap.xml
+
+# Crawl delay (in seconds) - adjust based on server capacity
+Crawl-delay: 1
+
+# Specific rules for Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0.5
+
+# Specific rules for Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 0.5
+
+# Block bad bots (optional)
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /

